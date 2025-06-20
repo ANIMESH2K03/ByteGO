@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bytego-backend.onrender.com';
+// const API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     try {
       // Send the POST request to the backend
-      const response = await fetch(`${API_BASE_URL}/api/login`, {
+      const response = await fetch(`${window.API_BASE_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

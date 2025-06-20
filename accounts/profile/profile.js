@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bytego-backend.onrender.com';
+// const window.API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const response = await fetch(`'${API_BASE_URL}/api/profile`, {
+    const response = await fetch(`'${window.API_BASE_URL}/api/profile`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`

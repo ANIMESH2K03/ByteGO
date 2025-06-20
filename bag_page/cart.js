@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bytego-backend.onrender.com';
+// const API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 /* ________________________________________menu button js animation starts here */
@@ -47,7 +47,7 @@ async function getCartItems() {
       throw new Error("No token found, please log in.");
     }
 
-    const response = await fetch(`${API_BASE_URL}/api/cart`, {
+    const response = await fetch(`${window.API_BASE_URL}/api/cart`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`, // Attach the token in Authorization header
@@ -201,7 +201,7 @@ async function displayCartItems() {
 async function updateCartItemQuantity(itemId, quantity) {
   const token = localStorage.getItem('authToken'); // Get the token from localStorage
 
-  const response = await fetch(`${API_BASE_URL}/api/cart/update`, { // Ensure correct backend URL
+  const response = await fetch(`${window.API_BASE_URL}/api/cart/update`, { // Ensure correct backend URL
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -235,7 +235,7 @@ displayCartItems();
 async function removeItemFromCart(itemId) {
   const token = localStorage.getItem('authToken'); // Get the token from localStorage
 
-  const response = await fetch(`${API_BASE_URL}/api/cart/remove`, { // Ensure correct backend URL
+  const response = await fetch(`${window.API_BASE_URL}/api/cart/remove`, { // Ensure correct backend URL
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -359,7 +359,7 @@ const handlePayment = async (totalAmount) => {
     // 1. Create order from backend
     const token = localStorage.getItem('authToken')
 
-    const res = await fetch(`${API_BASE_URL}/api/razorpay/create-order`, {
+    const res = await fetch(`${window.API_BASE_URL}/api/razorpay/create-order`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -389,7 +389,7 @@ const handlePayment = async (totalAmount) => {
         const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
 
         // 3. Send payment success info to backend
-        const verifyRes = await fetch(`${API_BASE_URL}/api/razorpay/verify-payment`, {
+        const verifyRes = await fetch(`${window.API_BASE_URL}/api/razorpay/verify-payment`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

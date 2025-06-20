@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bytego-backend.onrender.com';
+// const API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 (async function validateAuthTokens() {
@@ -12,7 +12,7 @@ const API_BASE_URL = 'https://bytego-backend.onrender.com';
   }
 
   // Try to verify the access token by calling a protected API
-  const res = await fetch(`${API_BASE_URL}/api/some-protected-route`, {
+  const res = await fetch(`${window.API_BASE_URL}/api/some-protected-route`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${accessToken}`
@@ -23,7 +23,7 @@ const API_BASE_URL = 'https://bytego-backend.onrender.com';
   if (res.status === 401 || res.status === 403) {
     try {
       // Attempt refresh
-      const refreshRes = await fetch(`${API_BASE_URL}/api/refreshToken`, {
+      const refreshRes = await fetch(`${window.API_BASE_URL}/api/refreshToken`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refreshToken })
@@ -46,7 +46,7 @@ async function loadOrders() {
   const token = localStorage.getItem('authToken');
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/orders/staff`, {
+    const res = await fetch(`${window.API_BASE_URL}/api/orders/staff`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -122,7 +122,7 @@ document.querySelector('.input_button button').addEventListener('click', async (
   }
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/orders/confirm`, {
+    const res = await fetch(`${window.API_BASE_URL}/api/orders/confirm`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -242,7 +242,7 @@ document.querySelector('.camera_on').addEventListener('click', async () => {
 
           // Confirm the order
           const token = localStorage.getItem('authToken');
-          const res = await fetch(`${API_BASE_URL}/api/orders/confirm`, {
+          const res = await fetch(`${window.API_BASE_URL}/api/orders/confirm`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

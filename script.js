@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bytego-backend.onrender.com';
+// const API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 let currentlyDisplayedItems; // use for how many item are going to display
@@ -91,7 +91,7 @@ async function validateAccess() {
   }
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/profile`, {
+    const res = await fetch(`${window.API_BASE_URL}/api/profile`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -219,7 +219,7 @@ async function fetchItemsAndDisplay() {
       throw new Error("No token found, please log in.");
     }
 
-    let response = await fetch(`${API_BASE_URL}/api/menu`, {
+    let response = await fetch(`${window.API_BASE_URL}/api/menu`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -231,7 +231,7 @@ async function fetchItemsAndDisplay() {
       const newToken = await refreshAuthToken();
       if (newToken) {
         token = newToken;
-        response = await fetch(`${API_BASE_URL}/api/menu`, { // Retry request with new token
+        response = await fetch(`${window.API_BASE_URL}/api/menu`, { // Retry request with new token
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -262,7 +262,7 @@ async function refreshAuthToken() {
   if (!refreshToken) return null;
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/refreshToken`, {
+    const response = await fetch(`${window.API_BASE_URL}/api/refreshToken`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refreshToken })
@@ -409,7 +409,7 @@ async function handleAddToCart(event) {
 
   // Check if the item already exists in the cart
   try {
-    const response = await fetch(`${API_BASE_URL}/api/cart/add`, {
+    const response = await fetch(`${window.API_BASE_URL}/api/cart/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -444,7 +444,7 @@ let currentIndex = 0;
 // Fetch images once on page load
 async function fetchBackgroundImages() {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/backPIC`);
+    const response = await fetch(`${window.API_BASE_URL}/api/backPIC`);
     if (!response.ok) {
       throw new Error("Failed to fetch background images");
     }

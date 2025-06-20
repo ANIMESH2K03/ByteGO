@@ -1,52 +1,54 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-
-// require for login form------
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-
 require('dotenv').config();  
-const jwtSecretKey = process.env.JWT_SECRET_KEY;
+const mongoose = require('mongoose');
+
+
 // require for login form------
 
 // Initialize Express
 const app = express();
 
 // Middleware
-app.use(bodyParser.json());
 
 // app.use(cors());
 
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
-
 const allowedOrigins = [
-  'http://localhost:5500', 
-  'https://stupendous-stardust-44dcf9.netlify.app/'
+  'http://localhost:5500',
+  'http://127.0.0.1:5500',
+  'http://127.0.0.1:5501',
+  'https://your-netlify-site.netlify.app', // Replace with real Netlify site
 ];
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('Blocked by CORS:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
-}));
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+// ⚠️ IMPORTANT: apply CORS before any route
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // handle preflight
+
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+
+// require for login form------
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+
+const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
 // MongoDB Connection
 const mongoURI = process.env.MONGODB_URL;

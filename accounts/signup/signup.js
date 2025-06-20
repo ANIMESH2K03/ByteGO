@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bytego-backend.onrender.com';
+// const API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 const codeModal = document.getElementById('codeModal');
@@ -32,7 +32,7 @@ closeMessageBtn.addEventListener('click', () => {
 
 // Send code
 const sendVerificationCode = async (userId, email) => {
-  const response = await fetch(`${API_BASE_URL}/api/send-verification-code`, {
+  const response = await fetch(`${window.API_BASE_URL}/api/send-verification-code`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ userId, email })
@@ -43,7 +43,7 @@ const sendVerificationCode = async (userId, email) => {
 
 // Verify and signup
 const verifyCodeAndSignup = async (userId, email, password, code) => {
-  const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
+  const response = await fetch(`${window.API_BASE_URL}/api/verify-code`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ userId, email, password, code })
