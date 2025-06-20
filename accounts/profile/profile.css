@@ -1,16 +1,111 @@
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .profile-card {
-      max-width: 400px;
-      margin: auto;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    img {
-      max-width: 100px;
-      border-radius: 50%;
-    }
-    .info {
-      margin-top: 10px;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: #e2e8f0;
+  margin: 0;
+  padding: 20px;
+}
+
+#profileContainer {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.profile-wrapper {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  padding: 50px 50px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-header img {
+  border-radius: 50%;
+  width: 150px;
+  height: auto;
+}
+
+.profile-header h2 {
+  margin: 10px 0 5px;
+}
+
+.profile-header p {
+  color: #666;
+  margin: 0;
+}
+
+.profile-info {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.profile-row label {
+  font-weight: bold;
+  width: 30%;
+  margin-bottom: 6px;
+}
+
+.profile-data {
+  width: 65%;
+}
+
+.profile-data input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.profile-actions {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: end;
+}
+
+.profile-actions button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.profile-actions button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .profile-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-row label,
+  .profile-data {
+    width: 100%;
+  }
+
+  .profile-data {
+    margin-top: 5px;
+  }
+}

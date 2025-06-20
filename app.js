@@ -310,6 +310,22 @@ app.get('/api/profile', verifyToken, async (req, res) => {
 });
 
 
+app.put('/api/profile/update', verifyToken, async (req, res) => {
+  try {
+    const updates = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.userId,
+      { $set: updates },
+      { new: true, select: '-password -refreshToken' }
+    );
+    if (!updatedUser) return res.status(404).json({ message: 'User not found' });
+    res.json(updatedUser);
+  } catch (err) {
+    console.error('Error updating profile:', err);
+    res.status(500).json({ message: 'Failed to update profile' });
+  }
+});
+
 
 
 
