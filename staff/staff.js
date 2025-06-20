@@ -1,3 +1,6 @@
+const API_BASE_URL = 'https://bytego-backend.onrender.com';
+
+
 (async function validateAuthTokens() {
   const accessToken = localStorage.getItem('authToken');
   const refreshToken = localStorage.getItem('refreshToken');

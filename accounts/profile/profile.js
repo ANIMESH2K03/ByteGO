@@ -1,3 +1,6 @@
+const API_BASE_URL = 'https://bytego-backend.onrender.com';
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('authToken');
 

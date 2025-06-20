@@ -1,5 +1,4 @@
-
-
+const API_BASE_URL = 'https://bytego-backend.onrender.com';
 
 
 document.addEventListener('DOMContentLoaded', function () {

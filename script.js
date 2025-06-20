@@ -1,3 +1,6 @@
+const API_BASE_URL = 'https://bytego-backend.onrender.com';
+
+
 let currentlyDisplayedItems; // use for how many item are going to display
 
 window.onload = function() {

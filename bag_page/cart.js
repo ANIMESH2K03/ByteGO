@@ -1,4 +1,5 @@
-// const { json } = require("body-parser");
+const API_BASE_URL = 'https://bytego-backend.onrender.com';
+
 
 /* ________________________________________menu button js animation starts here */
 

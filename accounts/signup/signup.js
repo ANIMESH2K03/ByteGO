@@ -1,3 +1,6 @@
+const API_BASE_URL = 'https://bytego-backend.onrender.com';
+
+
 const codeModal = document.getElementById('codeModal');
 const verificationCodeInput = document.getElementById('verificationCode');
 const submitCodeBtn = document.getElementById('submitCodeBtn');
