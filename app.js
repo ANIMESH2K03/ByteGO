@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 
-// Enable CORS for all origins or restrict based on environment
-const allowedOrigins = ['http://localhost:5500', 'https://your-frontend-domain.com'];
 
 
 
@@ -52,6 +50,11 @@ const itemSchema = new mongoose.Schema({
 const Item = mongoose.model('Item', itemSchema, 'items');
 
 
+const allowedOrigins = [
+  'http://localhost:5500', 
+  'https://your-frontend-domain.onrender.com'
+];
+
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -62,6 +65,7 @@ app.use(cors({
   },
   credentials: true,
 }));
+
 
 
 
