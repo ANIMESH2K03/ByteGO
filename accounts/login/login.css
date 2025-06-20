@@ -1,0 +1,121 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login_main_container{
+  height: 100%;
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  
+  position: absolute;
+}
+.login_main_container>img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  filter: blur(3px);
+}
+
+.login_main_half{
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  overflow: hidden;
+  z-index: 3;
+}
+.login_main_half img {
+  height: 75%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 25px;
+  
+}
+
+.login_main_half_second{
+  height: 100%;
+  width: 50%;
+
+}
+
+.login-container {
+  padding: 30px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  z-index: 5;
+  background-color: #cccccc32;
+  backdrop-filter: blur(10px); /* Apply blur to the background */
+  box-shadow: inset 0 0 10px #727272;
+
+
+  /* -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px); */
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #adadad9e;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.links {
+  margin-top: 10px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}

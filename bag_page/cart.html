@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <link rel="stylesheet" href="./cart.css">
+
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav_ist">
+        <!-- <div class="home_button"><i class="ri-menu-2-line"></i></div> -->
+        
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a href="../index.html">Home</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">Contact</a>
+        </div>
+        
+        <div id="dimOverlay" class="dim-overlay" onclick="closeNav()"></div>
+        
+
+        <div id="content" class="content">
+
+          <div id="menu-btn-container">
+            <div id="menu-btn" onclick="openNav()">
+              <!-- <input type="checkbox" id="menu-checkbox" /> -->
+              <input id="menu-checkbox" />
+              <label for="menu-checkbox" id="menu-label">
+                <div id="menu-bar"></div>
+              </label>
+            </div>
+          </div>
+
+          <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()"><i class="ri-menu-2-line"></i></span> -->
+        </div>
+
+        <div id="content" class="content">
+          <a href="../index.html">
+            <lord-icon
+              src="https://cdn.lordicon.com/wmwqvixz.json"
+              trigger="hover"
+              state="morph-home-3"
+              colors="primary:#292929"
+              style="width:35px;height:35px;margin-left: 20px;">
+          </lord-icon>
+          </a>
+        </div>
+
+
+
+
+      </div>
+
+      <div class="nav_3rd">
+        <!-- <div class="nav_3rd_item "><i class="ri-user-fill"></i></div> -->
+        <div class="nav_3rd_item "><lord-icon
+          src="https://cdn.lordicon.com/hrjifpbq.json"
+          trigger="hover"
+          colors="primary:#292929"
+          style="width:40px;height:40px">
+      </lord-icon></div>
+        <div class="dropdown-menu">
+            <!-- <p class="user_ID">KID24</p> -->
+            <a href="../accounts/profile/profile.html">Profile</i></a>
+            <button onclick="account_log_out()">logout <i class="ri-login-box-line"></i></button>
+        </div>
+
+        <a href="./cart.html">
+          <!-- <div class="nav_3rd_item"><i class="ri-shopping-cart-line"></i></div> -->
+          <div class="nav_3rd_item">
+            <lord-icon
+                src="https://cdn.lordicon.com/pbrgppbb.json"
+                trigger="hover"
+                colors="primary:#292929"
+                style="width:40px;height:40px">
+            </lord-icon>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+  </header>
+
+  <main style="padding-top: 60px;">
+
+    <div class="parent_cart_container">
+      <div class="X_child_cart_container">
+        
+      </div>
+      <div class="Y_child_cart_container">
+        <div class="y_child_one">
+          <div class="price_heading">
+            <p>PRICE DETAILS</p>
+          </div>
+          <div class="price_details">
+
+          </div>
+          <div class="total_price_div">
+            <span class="item_calculation"><p class="item_name">Discount On MRP</p><p class="item_price">&#8377;0</p></span>
+            <span class="item_calculation"><p class="item_name">Platform Fee</p><p class="item_price">&#8377;2</p></span>
+          </div>
+          <div class="total_amount">
+            <span class="item_calculation"><p class="item_name">Total</p><p id="total_item_price" class="item_price">&#8377;</p></span>
+          </div>
+        </div>
+
+        <div class="y_child_two">
+            <button class="PLACE_ORDER">purchase</button>  
+        </div>
+        
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="back-to-top">
+      <a href="#">back to top<i class="ri-arrow-up-s-line"></i></a>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  <script src="./cart.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+</html>

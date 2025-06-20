@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Order Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .scanner {
+      border: 2px dashed #6c757d;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    #reader {
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+    }
+    table {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body class="p-4">
+
+  <div class="container">
+    <h2 class="mb-4">Order Dashboard</h2>
+
+    <div class="row mb-4 g-3">
+      <div class="col-md-6">
+        <input type="text" id="searchOrderId" class="form-control" placeholder="Enter Order ID">
+      </div>
+      <div class="col-md-6">
+        <input type="text" id="searchCode" class="form-control" placeholder="Enter Confirmation Code">
+      </div>
+    </div>
+
+    <div class="scanner mb-4">
+      <h5>📷 Scan QR Code</h5>
+      <div id="reader"></div>
+    </div>
+
+    <h4>📦 Today's Orders</h4>
+    <table class="table table-bordered table-striped" id="orderTable">
+      <thead class="table-dark">
+        <tr>
+          <th>Order ID</th>
+          <th>Confirmation Code</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody id="orderTableBody">
+        <!-- Orders will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script>
+    // Sample static orders (you will replace with dynamic data from backend)
+    const sampleOrders = [
+      {
+        orderId: "00A1B2",
+        confirmationCode: "X9Z2K8",
+        amount: 150,
+        status: "pending",
+        createdAt: "2025-06-18T07:11:00+05:30"
+      },
+      {
+        orderId: "00A1B3",
+        confirmationCode: "Q2L7M1",
+        amount: 200,
+        status: "received",
+        createdAt: "2025-06-18T08:30:00+05:30"
+      }
+    ];
+
+    const tableBody = document.getElementById("orderTableBody");
+
+    function renderOrders(orders) {
+      tableBody.innerHTML = "";
+      orders.forEach(order => {
+        const date = new Date(order.createdAt).toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          year: "numeric", month: "short", day: "2-digit",
+          hour: "2-digit", minute: "2-digit", hour12: true
+        });
+        tableBody.innerHTML += `
+          <tr>
+            <td>${order.orderId}</td>
+            <td>${order.confirmationCode}</td>
+            <td>₹${order.amount}</td>
+            <td>${order.status}</td>
+            <td>${date}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // Filter orders on input
+    document.getElementById("searchOrderId").addEventListener("input", () => {
+      const query = document.getElementById("searchOrderId").value.toUpperCase();
+      const filtered = sampleOrders.filter(o => o.orderId.includes(query));
+      renderOrders(filtered);
+    });
+
+    document.getElementById("searchCode").addEventListener("input", () => {
+      const query = document.getElementById("searchCode").value.toUpperCase();
+      const filtered = sampleOrders.filter(o => o.confirmationCode.includes(query));
+      renderOrders(filtered);
+    });
+
+    // QR Scanner
+    function onScanSuccess(decodedText, decodedResult) {
+      try {
+        const parsed = JSON.parse(decodedText);
+        alert(`Scanned:\nOrder ID: ${parsed.orderId}\nCode: ${parsed.confirmationCode}`);
+        document.getElementById("searchOrderId").value = parsed.orderId;
+        document.getElementById("searchCode").value = parsed.confirmationCode;
+
+        const filtered = sampleOrders.filter(
+          o => o.orderId === parsed.orderId && o.confirmationCode === parsed.confirmationCode
+        );
+        renderOrders(filtered);
+      } catch {
+        alert("Invalid QR Code");
+      }
+    }
+
+    const html5QrCode = new Html5Qrcode("reader");
+    Html5Qrcode.getCameras().then(devices => {
+      if (devices.length) {
+        html5QrCode.start(
+          { facingMode: "environment" },
+          { fps: 30, qrbox: 200 },
+          onScanSuccess
+        );
+      }
+    }).catch(err => {
+      console.error("Camera access denied or not found", err);
+    });
+
+    // Initial load
+    renderOrders(sampleOrders);
+  </script>
+</body>
+</html>

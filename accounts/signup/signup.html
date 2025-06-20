@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - ByteGo</title>
+  <link rel="stylesheet" href="./signup.css">
+</head>
+  <body>
+    <div class="login_main_container">
+      <img src="./back2.jpg" alt="">
+      <div class="login_main_half">
+        <img src="./back1.jpg" alt="">
+      </div>
+      <div class="login_main_half_second">
+      
+      </div>
+    </div>
+    <div class="signup-container">
+      <h2>Sign Up for <br/> ByteGO</h2>
+      <form id="signupForm" autocomplete="off">
+        <input type="text" id="userId" placeholder="UserID" required />
+      
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+        
+        <button type="submit">Sign Up</button>
+      </form>
+      
+      <div class="links">
+        <a href="../login/login.html">Already have an account? Login</a>
+      </div>
+    </div>
+  
+      <!-- Verification Code Modal -->
+      <div id="codeModal" class="modal">
+        <div class="modal-content">
+          <p id="countdownTimer"></p>
+          <input type="text" id="verificationCode" autocomplete="off" placeholder="6-digit code" maxlength="6">
+          <button id="submitCodeBtn">Submit</button>
+        </div>
+      </div>
+    
+      <!-- Message Modal -->
+      <div id="messageModal" class="modal">
+        <div class="modal-content">
+          <p id="messageText"></p>
+          <button id="closeMessageBtn">OK</button>
+        </div>
+      </div>
+    
+    <script src="./signup.js"></script>
+    <script src="sweetalert2.all.min.js"></script>
+  </body>
+</html>

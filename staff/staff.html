@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./satff.css">
+  <title>Staff Dashboard</title>
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Order Panel</title>
+</head>
+<body>
+
+  <div class="staff">
+
+ 
+  <header>
+    <h3><i class="ri-survey-line"></i>Order Dashboard</h3>
+  </header>
+  <main>
+    <div class="input_box">
+      <input type="text" class="order_id" placeholder="Enter Order Id">
+      <input type="text" class="confirmation_code" placeholder="Enter Confirmation Code">
+    </div>
+    <div class="input_button">
+      <button>Confirm</button>
+    </div>
+
+    <div class="scan_box">
+      <span class="camera_box">
+        <h3><i class="ri-camera-line"></i>Scan QR Code</h3>
+      </span>
+      <div id="qr-reader" style="width: 100%;"></div>
+    </div>
+    <button class="camera_on">Scan</button>
+
+
+    <div id="pending_order_show" class="order_show">
+      <h3><i class="ri-pass-pending-line"></i>Pending Orders</h3>
+      <table id="remaining_order_table" class="order_table">
+
+      </table>
+    </div>
+    <div id="received_order_show" class="order_show">
+      <h3><i class="ri-check-double-line"></i>Completed Orders</h3>
+      <table id="Completed_order_table" class="order_table">
+          
+      </table>
+    </div>
+
+    <div class="tickit_popup hidden" id="ticketPopupOverlay">
+      <div class="ticket" id="ticketContent">
+              <div class="ticket">
+        <div class="ticket_header">
+          <h3>ByteGO</h3>
+          <p>Quick order, Quick Serve</p>
+        </div>
+        <div class="ticket_main">
+          <div class="user_info">
+            <p>userId : </p>
+            <p>Date : </p>
+          </div>
+          <div class="order_info">
+            <p>Order Id : </p>
+            <p>Confirmation Code : </p>
+          </div>
+          <div class="qr_box">
+            <img src="./demo_QR.png" alt="demo_QR">
+          </div>
+          <div class="order_details">
+            <table>
+              <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Qty.</th>
+                <th>Amount</th>
+              </tr>
+              <tr>
+                <td>Rui meal</td>
+                <td>90</td>
+                <td>5</td>
+                <td>450</td>
+              </tr>
+              <tr>
+                <td>Rui Meal</td>
+                <td>90</td>
+                <td>5</td>
+                <td>450</td>
+              </tr>
+            </table>
+          </div>
+          <div class="sub_total">
+            <table>
+              <tr>
+                <td>Total Qty : 5</td>
+                <td>Sub Total : 428.55</td>
+              </tr>
+              <tr>
+                <td>CGST 2.5%</td>
+                <td>10.71</td>
+              </tr>
+              <tr>
+                <td>SGST 2.5%</td>
+                <td>10.71</td>
+              </tr>
+            </table>
+          </div>
+          <div class="grand_total">
+            <table>
+              <tr>
+                <td>Round off</td>
+                <td>+0.03</td>
+              </tr>
+              <tr>
+                <td>Grand Total</td>
+                <td>$450</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="ticket_footer">
+          <p>FFSAI Lic NO. 22821015000576</p>
+          <p>Thank You</p>
+        </div>
+      </div>
+      </div>
+      <button id="tickit_close">Done</button>
+    </div>
+
+
+  </main>
+
+ </div>
+  
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script src="./staff.js"></script>
+</body>
+</html>
+
+</body>
+</html>
