@@ -3,15 +3,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
-
-
-
-
 // require for login form------
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 
 
 require('dotenv').config();  
@@ -23,7 +17,36 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+
+// app.use(cors());
+
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
+const allowedOrigins = [
+  'http://localhost:5500', 
+  'https://stupendous-stardust-44dcf9.netlify.app/'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 
 // MongoDB Connection
 const mongoURI = process.env.MONGODB_URL;
@@ -48,25 +71,6 @@ const itemSchema = new mongoose.Schema({
 });
 
 const Item = mongoose.model('Item', itemSchema, 'items');
-
-
-const allowedOrigins = [
-  'http://localhost:5500', 
-  'https://your-frontend-domain.onrender.com'
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
-
-
 
 
 
