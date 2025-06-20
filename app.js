@@ -17,7 +17,7 @@ const allowedOrigins = [
   'http://localhost:5500',
   'http://127.0.0.1:5500',
   'http://127.0.0.1:5501',
-  'https://your-netlify-site.netlify.app', // Replace with real Netlify site
+  'https://stupendous-stardust-44dcf9.netlify.app', // Replace with real Netlify site
 ];
 
 const corsOptions = {
