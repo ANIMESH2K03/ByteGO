@@ -638,3 +638,123 @@ footer{
 }
 
 /* --------------------------------------------- */
+
+
+/* tickit style starts here _____________________ */
+
+
+/* tickit  starting here */
+
+#showOrderBtn{
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  background-color: #04AA6D;
+  color: #fff;
+}
+
+#orderTickets{
+  display: none;
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#orderTickets .ticket{
+  margin: 10px;
+}
+
+/* Set the ticket and button to fill the available space inside popup */
+.ticket {
+  background-color: antiquewhite;
+  border: 1px dotted black;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%; /* Full width within 20px padding */
+  max-width: 400px; /* Optional: limit width on large screens */
+  box-sizing: border-box;
+}
+
+#tickit_close {
+  margin-top: 10px;
+  padding: 12px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  background-color: #04AA6D;
+  color: #fff;
+  font-size: 16px;
+  max-width: 600px; /* Same max width as ticket */
+  box-sizing: border-box;
+}
+
+.ticket_header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+.user_info{
+  border-bottom: 2px solid black;
+  padding: 5px 0px;
+}
+.order_info{
+  padding: 5px 0px;
+  border-bottom: 2px solid black;
+}
+.qr_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-bottom: 2px solid black;
+}
+.qr_box img{
+  width: 60%;
+  object-fit: contain;
+}
+.order_details{
+  padding: 5px 0px;
+  border-bottom: 2px solid black;
+}
+.order_details table{
+  width: 100%;
+  text-align: end;
+  border-collapse: collapse;
+}
+.order_details table th{
+  border-bottom: 1px dashed black;
+}
+.sub_total{
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: end;
+}
+.sub_total table{
+  width: 75%;
+  text-align: end;
+}
+.grand_total{
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: end;
+}
+.grand_total table{
+  width: 50%;
+  text-align: end;
+}
+.grand_total table th{
+  border-bottom: 1px dashed black;
+}
+.ticket_footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+/* Tickit ends here */

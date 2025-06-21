@@ -408,31 +408,14 @@ const handlePayment = async (totalAmount) => {
 
         const parentCartContainer = document.querySelector('.parent_cart_container');
 
-        // if (verifyRes.ok) {
-        //   parentCartContainer.innerHTML = `
-        //     <div class="video_cart">
-        //       <iframe src="https://lottie.host/embed/b34e0327-51fb-45f3-b220-f9b97b6b972b/7tjVmzhvV9.lottie"></iframe>
-        //     </div>`;
-        // } else {
-        //   alert('Payment verified but order saving failed.');
-        // }
-              
         if (verifyRes.ok) {
-          const { orderId, confirmationCode, qrCodeUrl } = verifyData.order;
-        
           parentCartContainer.innerHTML = `
-            <div class="order-success">
-              <h3>Order Confirmed</h3>
-              <p><strong>Order ID:</strong> ${orderId}</p>
-              <p><strong>Confirmation Code:</strong> ${confirmationCode}</p>
-              <img src="${qrCodeUrl}" alt="QR Code" style="max-width: 250px; margin-top: 20px;" />
-            </div>
-          `;
+            <div class="video_cart">
+              <iframe src="https://lottie.host/embed/b34e0327-51fb-45f3-b220-f9b97b6b972b/7tjVmzhvV9.lottie"></iframe>
+            </div>`;
         } else {
           alert('Payment verified but order saving failed.');
         }
-
-
 
       },
       prefill: {
@@ -451,22 +434,6 @@ const handlePayment = async (totalAmount) => {
     alert('Something went wrong');
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -492,3 +459,166 @@ async function profileData() {
     console.log('cart profile error',err);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('authToken');
+  const container = document.getElementById('orderTickets');
+
+  if (!token) {
+    container.innerHTML = '<p>Please log in to view your orders.</p>';
+    return;
+  }
+
+  try {
+    const res = await fetch(`${window.API_BASE_URL}/api/orders/user`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error('Failed to fetch orders');
+
+    const orders = await res.json();
+    console.log(orders);
+
+    if (!orders.length) {
+      container.innerHTML = '<p>No orders found.</p>';
+      return;
+    }
+
+    // orders.forEach(order => {
+    //   const ticket = createTicket(order);
+    //   container.appendChild(ticket);
+    // });
+
+  orders.forEach(order => {
+  if (order.status === 'pending') {
+    const ticket = createTicket(order);
+    container.appendChild(ticket);
+  }
+});
+
+
+  } catch (err) {
+    console.error('Order fetch error:', err);
+    container.innerHTML = `<p>Error: ${err.message}</p>`;
+  }
+});
+
+function createTicket(order) {
+  const {
+    userId,
+    orderId,
+    confirmationCode,
+    qrCodeUrl,
+    receivedAt,
+    items,
+    subTotal,
+    gst,
+    grandTotal
+  } = order;
+
+  const date = receivedAt ? new Date(receivedAt).toLocaleString('en-IN') : 'N/A';
+  const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
+  const roundOff = +(grandTotal - (subTotal + 2 * gst)).toFixed(2);
+
+  const itemRows = items.map(item => `
+    <tr>
+      <td>${item.name}</td>
+      <td>${item.price}</td>
+      <td>${item.quantity}</td>
+      <td>${item.amount}</td>
+    </tr>
+  `).join('');
+
+  const div = document.createElement('div');
+  div.className = 'ticket';
+
+  div.innerHTML = `
+    <div class="ticket_header">
+      <h3>ByteGO</h3>
+      <p>Quick order, Quick Serve</p>
+    </div>
+    <div class="ticket_main">
+      <div class="user_info">
+        <p>User ID: ${userId}</p>
+        <p>Date: ${date}</p>
+      </div>
+      <div class="order_info">
+        <p>Order ID: ${orderId}</p>
+        <p>Confirmation Code: ${confirmationCode}</p>
+      </div>
+      <div class="qr_box">
+        <img src="${qrCodeUrl}" alt="QR Code">
+      </div>
+      <div class="order_details">
+        <table>
+          <tr><th>Item</th><th>Price</th><th>Qty.</th><th>Amount</th></tr>
+          ${itemRows}
+        </table>
+      </div>
+      <div class="sub_total">
+        <table>
+          <tr><td>Total Qty:</td><td>${totalQty}</td></tr>
+          <tr><td>Sub Total:</td><td>₹${subTotal.toFixed(2)}</td></tr>
+          <tr><td>CGST 2.5%:</td><td>₹${gst}</td></tr>
+          <tr><td>SGST 2.5%:</td><td>₹${gst}</td></tr>
+        </table>
+      </div>
+      <div class="grand_total">
+        <table>
+          <tr><td>Round Off:</td><td>${roundOff >= 0 ? '+' : ''}${roundOff}</td></tr>
+          <tr><td>Grand Total:</td><td><strong>₹${grandTotal}</strong></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="ticket_footer">
+      <p>FSSAI Lic NO. 22821015000576</p>
+      <p>Thank You</p>
+    </div>
+  `;
+
+  return div;
+}
+
+
+const toggleBtn = document.getElementById('showOrderBtn');
+const orderTickets = document.getElementById('orderTickets');
+
+toggleBtn.addEventListener('click', () => {
+  const isHidden = orderTickets.style.display === 'none';
+
+  // Toggle visibility
+  orderTickets.style.display = isHidden ? 'block' : 'none';
+
+  // Toggle button text
+  toggleBtn.textContent = isHidden ? 'Close Order' : 'Show Order';
+});

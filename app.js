@@ -747,6 +747,55 @@ app.post('/api/orders/confirm', verifyToken, async (req, res) => {
 });
 
 
+
+app.get('/api/orders/user', verifyToken, async (req, res) => {
+  try {
+    const orders = await Order.find({ userId: req.userId }).sort({ createdAt: -1 });
+
+    const user = await User.findById(req.userId);
+    const userIdString = user?.userId || 'Unknown';
+
+    const detailedOrders = await Promise.all(orders.map(async (order) => {
+      const fullItems = await Promise.all(order.items.map(async (itemObj) => {
+        const item = await Item.findById(itemObj.itemId);
+        const name = item?.itemDescription?.item_name || 'Unknown Item';
+        const price = item?.itemDescription?.item_price || 0;
+
+        return {
+          name,
+          price,
+          quantity: itemObj.quantity,
+          amount: price * itemObj.quantity
+        };
+      }));
+
+      const subTotal = fullItems.reduce((sum, item) => sum + item.amount, 0);
+      const gst = +(subTotal * 0.025).toFixed(2); // 2.5% GST on both CGST and SGST
+      const grandTotal = Math.round(subTotal + gst * 2);
+
+      return {
+        orderId: order.orderId,
+        confirmationCode: order.confirmationCode,
+        receivedAt: order.receivedAt,
+        qrCodeUrl: order.qrCodeUrl,
+        userId: userIdString,
+        items: fullItems,
+        status: order.status, // add later 
+        subTotal,
+        gst,
+        grandTotal
+      };
+    }));
+
+    res.json(detailedOrders);
+  } catch (error) {
+    console.error('Error fetching user orders:', error);
+    res.status(500).json({ message: 'Server error fetching orders' });
+  }
+});
+
+
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
